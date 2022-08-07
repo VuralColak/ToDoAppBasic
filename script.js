@@ -57,6 +57,18 @@ function setItemToLS(text){
 }
 
 
+// delete item from LS
+function deleteItemFromLS(text) {
+    items = getItemsFromLS();
+    items.forEach(function(item, index){
+        if (item === text) {
+            items.splice(index,1);
+        }
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+}
+
+
 function createItem(text) {
     // create li
     const li = document.createElement('li');
@@ -103,6 +115,9 @@ function deleteItem(e){
     if (e.target.className === 'fas fa-times') {
         if (confirm('Are you sure?')) {
             e.target.parentElement.parentElement.remove();
+
+            // delete item from LS
+            deleteItemFromLS(e.target.parentElement.parentElement.textContent);
         }
     }
 
@@ -119,11 +134,17 @@ function deleteAllItems(e) {
         // taskList.innerHTML='';
         
         // solution 2
-        taskList.childNodes.forEach(function(item) {
-            if (item.nodeType === 1) {
-                item.remove();
-            }
-        });
+        // taskList.childNodes.forEach(function(item) {
+        //     if (item.nodeType === 1) {
+        //         item.remove();
+        //     }
+        // });
+
+        // solution 3
+        while (taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
+        }
+        localStorage.clear();
     }
 
     e.preventDefault();

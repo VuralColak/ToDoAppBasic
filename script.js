@@ -21,6 +21,7 @@ function eventListeners() {
     btnDeleteAll.addEventListener('click', deleteAllItems);
 }
 
+
 // add new item
 function addNewItem(e) {
 
@@ -28,7 +29,6 @@ function addNewItem(e) {
         alert('add new item');
     }
 
-    
     // create li
     const li = document.createElement('li');
     li.className = 'list-group-item list-group-item-secondary';
@@ -64,7 +64,7 @@ function deleteItem(e){
 
 
     e.preventDefault();
-}
+};
 
 
 // delete all Items
@@ -83,6 +83,5 @@ function deleteAllItems(e) {
         });
     }
 
-
     e.preventDefault();
-}
+};

@@ -5,7 +5,7 @@ const form = document.querySelector('form');
 const input = document.querySelector('#txtTaskName');
 const btnDeleteAll = document.querySelector('#btnDeleteAll');
 const taskList = document.querySelector('#task-list');
-const items = ['item 1','item 2','item 3'];
+let items;
 
 
 // load items
@@ -28,9 +28,32 @@ function eventListeners() {
 
 
 function loadItems() {
+
+    items = getItemsFromLS();
+
     items.forEach(function (item) {
         createItem(item);
     })
+}
+
+
+// get items from Local Storage
+function getItemsFromLS() {
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+    return items;
+}
+
+// set item to Local Storage
+function setItemToLS(text){
+    items = getItemsFromLS();
+    items.push(text);
+    localStorage.setItem('items',JSON.stringify(items));
+
+
 }
 
 
@@ -63,6 +86,9 @@ function addNewItem(e) {
 
     // create item
     createItem(input.value);
+
+    // save to LS
+    setItemToLS(input.value);
 
     // clear input
     input.value='';

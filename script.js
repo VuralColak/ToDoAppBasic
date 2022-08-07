@@ -5,6 +5,7 @@ const form = document.querySelector('form');
 const input = document.querySelector('#txtTaskName');
 const btnDeleteAll = document.querySelector('#btnDeleteAll');
 const taskList = document.querySelector('#task-list');
+const items = ['item 1', 'item 2', 'item 3'];
 
 
 // call event listeners
